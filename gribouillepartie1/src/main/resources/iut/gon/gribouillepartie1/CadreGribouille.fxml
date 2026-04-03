@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Dessin">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="Charger" />
+              <MenuItem mnemonicParsing="false" text="Sauvegardet" />
+                  <MenuItem mnemonicParsing="false" text="Exporter" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Quitter" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Outils">
+               <items>
+                  <Menu mnemonicParsing="false" text="Epaisseur">
+                     <items>
+                        <RadioMenuItem mnemonicParsing="false" text="1">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="choixepaisseur" />
+                           </toggleGroup>
+                        </RadioMenuItem>
+                        <RadioMenuItem mnemonicParsing="false" text="2" toggleGroup="$choixepaisseur" />
+                        <RadioMenuItem mnemonicParsing="false" text="3" toggleGroup="$choixepaisseur" />
+                        <RadioMenuItem mnemonicParsing="false" text="4" toggleGroup="$choixepaisseur" />
+                        <RadioMenuItem mnemonicParsing="false" text="5" toggleGroup="$choixepaisseur" />
+                        <RadioMenuItem mnemonicParsing="false" text="6" toggleGroup="$choixepaisseur" />
+                        <RadioMenuItem mnemonicParsing="false" text="7" toggleGroup="$choixepaisseur" />
+                        <RadioMenuItem mnemonicParsing="false" text="8" toggleGroup="$choixepaisseur" />
+                        <RadioMenuItem mnemonicParsing="false" text="9" toggleGroup="$choixepaisseur" />
+                     </items>
+                  </Menu>
+                  <RadioMenuItem mnemonicParsing="false" text="Crayon">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="choixstylo" />
+                     </toggleGroup>
+                  </RadioMenuItem>
+                  <RadioMenuItem mnemonicParsing="false" text="Etoile" toggleGroup="$choixstylo" />
+               </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Aide">
+            <items>
+              <MenuItem mnemonicParsing="false" text="A propos" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Canvas height="200.0" width="200.0" />
+         </children>
+      </Pane>
+   </center>
+   <bottom>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="X: " />
+                  <Label text="0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <Label text="Y:" />
+                  <Label text=" 0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+               <children>
+                  <Label text="Epaisseur : " />
+                  <Label text=" 3" />
+               </children>
+            </HBox>
+            <Label text="Outils" GridPane.columnIndex="3" />
+            <Label text="Couleur" GridPane.columnIndex="4" />
+         </children>
+      </GridPane>
+   </bottom>
+   <right>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <ColorPicker />
+            <TilePane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1273c" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                     <TilePane.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </TilePane.margin>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#4fb56f" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                     <TilePane.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </TilePane.margin>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#204c75" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                     <TilePane.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </TilePane.margin>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8fc9ff" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                     <TilePane.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </TilePane.margin>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d756a3" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                     <TilePane.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </TilePane.margin>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e7ff1f" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                     <TilePane.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </TilePane.margin>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#404040" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                     <TilePane.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </TilePane.margin>
+                  </Rectangle>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                     <TilePane.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </TilePane.margin>
+                  </Rectangle>
+               </children>
+            </TilePane>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>
