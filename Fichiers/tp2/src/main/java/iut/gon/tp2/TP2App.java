@@ -71,7 +71,21 @@ public class TP2App extends Application {
   /** Prépare les menus et leurs événements */
   private void prepareMenus(MenuBar menus) {
     //TODO Remplir la barre de menus
-  }
+	  Menu m1= new Menu("_fichiers");
+	  Menu m2= new Menu("_aide");
+	  menus.getMenus().addAll(m2,m1);
+	  MenuItem i1= new MenuItem("quitter");
+	  MenuItem i2= new MenuItem("A propos");
+	  m1.getItems().addAll(i1);
+	  m2.getItems().addAll(i2);
+	  i1.setOnAction(event -> Platform.exit());
+	  i2.setOnAction(event -> {
+		  Alert alert =new Alert(Alert.AlertType.NONE,"",ButtonType.CLOSE);
+		  alert.setTitle("A propos");
+		  alert.setContentText("Fait par........VOUS!!");
+		  alert.show();
+	  });
+}
 
   /**
    Remplit la liste de gauche avec des valeurs
@@ -79,6 +93,7 @@ public class TP2App extends Application {
    */
   private void prepareListe() {
     //TODO active le bouton "Ajouter tout"
+	  
   }
 
   private void extraitIds(Scene scene) {
