@@ -93,7 +93,15 @@ public class TP2App extends Application {
    */
   private void prepareListe() {
     //TODO active le bouton "Ajouter tout"
-	  
+	  String s1= "Jean Fleur";
+	  String s2= "Christelle de Fontaine";
+	  String s3= "Evan Lys";
+	  String s4= "Poire Fabuleuse";
+	  gauche.getItems().add(s1);
+	  gauche.getItems().add(s2);
+	  gauche.getItems().add(s3);
+	  gauche.getItems().add(s4);
+	  ajouteTout.setDisable(false);
   }
 
   private void extraitIds(Scene scene) {
