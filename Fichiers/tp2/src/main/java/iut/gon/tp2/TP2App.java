@@ -46,6 +46,14 @@ public class TP2App extends Application {
   private void prepareFermeture(Stage stage) {
     stage.setOnCloseRequest(event -> {
       //TODO confirmer ou consommer l'événement
+    	Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",ButtonType.YES,ButtonType.NO);
+    	alert.setTitle("vous etes bien sur?????");
+    	alert.setContentText("vous etes ABSOLUMENT SUR DE VOULOIR QUITTER????????!!!!!");
+    	alert.showAndWait();
+    	if(alert.showAndWait().get()== ButtonType.NO) {
+    		event.consume();
+    	}
+
     });
   }
 
