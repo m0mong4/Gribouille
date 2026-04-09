@@ -14,10 +14,10 @@ public class Dialogues {
 	
 	public static boolean confirmation() {
 		
-		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"ETES VOUS SUR???",ButtonType.NO,ButtonType.YES);
         alert.setTitle("Confirmation");
         alert.setContentText("Voulez-vous vraiment quitter ?");
-        if(alert.showAndWait().get()==ButtonType.YES) {
+        if(alert.showAndWait().get()==ButtonType.NO) {
         	return true;
         }
         return false;
