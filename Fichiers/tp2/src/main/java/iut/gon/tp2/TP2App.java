@@ -59,6 +59,9 @@ public class TP2App extends Application {
   private void onAjouteTout(ActionEvent actionEvent) {
     droite.getItems().addAll(gauche.getItems());
     gauche.getItems().clear();
+    ajouteTout.setDisable(true);
+    retireTout.setDisable(false);
+    
     //TODO active/désactive les boutons
   }
 
@@ -66,7 +69,11 @@ public class TP2App extends Application {
    Active le bouton "Ajouter tout" et désactive le bouton "Retirer tout" */
   private void onRetireTout(ActionEvent actionEvent) {
     //TODO
-  }
+	  gauche.getItems().addAll(droite.getItems());
+	  droite.getItems().clear();
+	  retireTout.setDisable(true);
+	  ajouteTout.setDisable(false);
+	}
 
   /** Prépare les menus et leurs événements */
   private void prepareMenus(MenuBar menus) {
