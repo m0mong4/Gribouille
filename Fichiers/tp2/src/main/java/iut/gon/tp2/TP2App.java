@@ -38,6 +38,8 @@ public class TP2App extends Application {
     stage.setTitle("Gestion de groupe");
     stage.setScene(scene);
     stage.show();
+    versDroite.setOnAction(ActionEvent -> deplaceElement(gauche,droite));
+    versGauche.setOnAction(ActionEvent -> deplaceElement(droite,gauche));
   }
 
   /** Prépare la fenêtre pour demander confirmation avant fermeture */
@@ -109,6 +111,16 @@ public class TP2App extends Application {
 	  gauche.getItems().add(s3);
 	  gauche.getItems().add(s4);
 	  ajouteTout.setDisable(false);
+  }
+  
+  private void deplaceElement(ListView<String> source, ListView<String> cible) {
+	  
+	  int i = source.getSelectionModel().getSelectedIndex();
+	  if(i!=-1) {
+		  String elt = source.getItems().remove(i);
+		  cible.getItems().add(elt);
+		  source.getSelectionModel().clearSelection();
+	  }
   }
 
   private void extraitIds(Scene scene) {
