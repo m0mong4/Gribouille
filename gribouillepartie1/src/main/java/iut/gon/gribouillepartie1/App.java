@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.*;
 import javafx.scene.input.*;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -42,6 +44,16 @@ public class App extends Application {
         	prevX=event.getX();
         	prevY=event.getY();
         });
+        Pane pane = (Pane) dessin.getParent();
+        pane.addEventFilter(MouseEvent.MOUSE_PRESSED, event ->{
+        	if (event.getButton() == MouseButton.SECONDARY) {
+        	Circle cercle= new Circle(event.getX(),event.getY(),5);
+        	cercle.setMouseTransparent(true);
+        	pane.getChildren().add(cercle);
+        	}
+        	
+        });
+        
     }
 
     static void setRoot(String fxml) throws IOException {
