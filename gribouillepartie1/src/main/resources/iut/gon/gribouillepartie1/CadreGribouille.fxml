@@ -70,9 +70,9 @@
       </MenuBar>
    </top>
    <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <Pane fx:id = "pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Canvas height="200.0" width="200.0" />
+            <Canvas fx:id="toile" height="200.0" width="200.0" />
          </children>
       </Pane>
    </center>
@@ -95,7 +95,7 @@
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin></Label>
-                  <Label text="0">
+                  <Label fx:id = "abscisse" text="0">
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin></Label>
@@ -107,7 +107,7 @@
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin></Label>
-                  <Label text=" 0">
+                  <Label fx:id = "ordonnee" text=" 0">
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin></Label>
@@ -119,7 +119,7 @@
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin></Label>
-                  <Label text=" 3">
+                  <Label fx:id ="epais" text=" 3">
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin></Label>
@@ -139,45 +139,45 @@
    <right>
       <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: lightgrey;" BorderPane.alignment="CENTER">
          <children>
-            <ColorPicker />
+            <ColorPicker fx:id="choix_couleur" />
             <TilePane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e1273c" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="40.0">
+                  <Rectangle fx:id="rouge" arcHeight="5.0" arcWidth="5.0" fill="#e1273c" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="40.0">
                      <TilePane.margin>
                         <Insets left="7.0" top="5.0" />
                      </TilePane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#4fb56f" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                  <Rectangle fx:id="vert" arcHeight="5.0" arcWidth="5.0" fill="#4fb56f" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
                      <TilePane.margin>
                         <Insets left="7.0" top="5.0" />
                      </TilePane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#204c75" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                  <Rectangle fx:id="bleu" arcHeight="5.0" arcWidth="5.0" fill="#204c75" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
                      <TilePane.margin>
                         <Insets left="7.0" top="5.0" />
                      </TilePane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#8fc9ff" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                  <Rectangle fx:id="cyan" arcHeight="5.0" arcWidth="5.0" fill="#8fc9ff" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
                      <TilePane.margin>
                         <Insets left="7.0" top="5.0" />
                      </TilePane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d756a3" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                  <Rectangle fx:id="rose" arcHeight="5.0" arcWidth="5.0" fill="#d756a3" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
                      <TilePane.margin>
                         <Insets left="7.0" top="5.0" />
                      </TilePane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e7ff1f" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                  <Rectangle fx:id="jaune" arcHeight="5.0" arcWidth="5.0" fill="#e7ff1f" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
                      <TilePane.margin>
                         <Insets left="7.0" top="5.0" />
                      </TilePane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#404040" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                  <Rectangle fx:id="noir" arcHeight="5.0" arcWidth="5.0" fill="#404040" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
                      <TilePane.margin>
                         <Insets left="7.0" top="5.0" />
                      </TilePane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                  <Rectangle fx:id="blanc" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
                      <TilePane.margin>
                         <Insets left="7.0" top="5.0" />
                      </TilePane.margin>
