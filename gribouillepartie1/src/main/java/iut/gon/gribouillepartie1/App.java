@@ -25,16 +25,18 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
     	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("CadreGribouille.fxml"));
         scene = new Scene(fxmlLoader.load(), 640, 480);
+        Dessin d = new Dessin();
         stage.setScene(scene);
         stage.show();
-        
+        stage.titleProperty().bind(d.nomDuFichierProperty());
         stage.setOnCloseRequest(event -> {
         	if(Dialogues.confirmation()==true) {
         		event.consume();
         	}
         });
-        Dessin d = new Dessin();
+       
         ((GribouilleController)fxmlLoader.getController()).setDessin(d);
+        
         /*
         Canvas dessin = (Canvas) scene.lookup("Canvas");
         dessin.addEventHandler(MouseEvent.MOUSE_PRESSED, event ->{
