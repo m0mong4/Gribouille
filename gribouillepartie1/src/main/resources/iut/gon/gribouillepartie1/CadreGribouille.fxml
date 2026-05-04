@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.gon.gribouillepartie1.GribouilleController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -72,7 +72,7 @@
    <center>
       <Pane fx:id = "pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Canvas fx:id="toile" height="200.0" width="200.0" />
+            <Canvas fx:id="toile" height="200.0" width="200.0" onMousePressed="#onMousePressed" onMouseDragged="#onMouseDragged"/>
          </children>
       </Pane>
    </center>

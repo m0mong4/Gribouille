@@ -29,9 +29,9 @@ public class App extends Application {
         	if(Dialogues.confirmation()==true) {
         		event.consume();
         	}
-        	
-        	
         });
+        
+        /*
         Canvas dessin = (Canvas) scene.lookup("Canvas");
         dessin.addEventHandler(MouseEvent.MOUSE_PRESSED, event ->{
         	prevX=event.getX();
@@ -42,6 +42,7 @@ public class App extends Application {
         	prevX=event.getX();
         	prevY=event.getY();
         });
+        */
     }
 
     static void setRoot(String fxml) throws IOException {
