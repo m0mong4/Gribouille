@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import iut.gon.gribouille.modele.*;
+
 /**
  * JavaFX App
  */
@@ -21,17 +23,21 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("CadreGribouille"), 640, 480);
+    	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("CadreGribouille.fxml"));
+        scene = new Scene(fxmlLoader.load(), 640, 480);
+        Dessin d = new Dessin();
         stage.setScene(scene);
         stage.show();
-        
+        stage.titleProperty().bind(d.nomDuFichierProperty());
         stage.setOnCloseRequest(event -> {
         	if(Dialogues.confirmation()==true) {
         		event.consume();
         	}
-        	
-        	
         });
+       
+        ((GribouilleController)fxmlLoader.getController()).setDessin(d);
+        
+        /*
         Canvas dessin = (Canvas) scene.lookup("Canvas");
         dessin.addEventHandler(MouseEvent.MOUSE_PRESSED, event ->{
         	prevX=event.getX();
@@ -42,15 +48,7 @@ public class App extends Application {
         	prevX=event.getX();
         	prevY=event.getY();
         });
-    }
-
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
+        */
     }
 
     public static void main(String[] args) {
