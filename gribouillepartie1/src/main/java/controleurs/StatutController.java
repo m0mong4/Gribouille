@@ -15,5 +15,10 @@ public class StatutController {
 
     public void setControleur(Controleur controleur) {
         this.controleur = controleur;
+        // Liaisons avec les propriétés du contrôleur global
+        abscisse.textProperty().bind(controleur.precX.asString("%.0f"));
+        ordonnee.textProperty().bind(controleur.precY.asString("%.0f"));
+        epais.textProperty().bind(controleur.epaisseur.asString());
+        couleurLabel.textProperty().bind(controleur.couleur.asString());
     }
 }

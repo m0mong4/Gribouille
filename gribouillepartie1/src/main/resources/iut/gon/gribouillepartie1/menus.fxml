@@ -8,7 +8,7 @@
 <?import javafx.scene.control.ToggleGroup?>
 
 <MenuBar xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-         fx:controller="iut.gon.gribouillepartie1.controleurs.MenusController">
+         fx:controller="controleurs.MenusController">
     <menus>
         <Menu mnemonicParsing="false" text="Dessin">
             <items>
