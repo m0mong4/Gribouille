@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.geometry.Insets?>
+
+<VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: lightgrey;"
+      xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="iut.gon.gribouillepartie1.controleurs.CouleursController">
+    <children>
+        <ColorPicker fx:id="choix_couleur" />
+        <TilePane prefHeight="200.0" prefWidth="200.0">
+            <children>
+                <Rectangle fx:id="rouge" arcHeight="5.0" arcWidth="5.0" fill="#e1273c" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="40.0">
+                    <TilePane.margin><Insets left="7.0" top="5.0" /></TilePane.margin>
+                </Rectangle>
+                <Rectangle fx:id="vert" arcHeight="5.0" arcWidth="5.0" fill="#4fb56f" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                    <TilePane.margin><Insets left="7.0" top="5.0" /></TilePane.margin>
+                </Rectangle>
+                <Rectangle fx:id="bleu" arcHeight="5.0" arcWidth="5.0" fill="#204c75" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                    <TilePane.margin><Insets left="7.0" top="5.0" /></TilePane.margin>
+                </Rectangle>
+                <Rectangle fx:id="cyan" arcHeight="5.0" arcWidth="5.0" fill="#8fc9ff" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                    <TilePane.margin><Insets left="7.0" top="5.0" /></TilePane.margin>
+                </Rectangle>
+                <Rectangle fx:id="rose" arcHeight="5.0" arcWidth="5.0" fill="#d756a3" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                    <TilePane.margin><Insets left="7.0" top="5.0" /></TilePane.margin>
+                </Rectangle>
+                <Rectangle fx:id="jaune" arcHeight="5.0" arcWidth="5.0" fill="#e7ff1f" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                    <TilePane.margin><Insets left="7.0" top="5.0" /></TilePane.margin>
+                </Rectangle>
+                <Rectangle fx:id="noir" arcHeight="5.0" arcWidth="5.0" fill="#404040" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                    <TilePane.margin><Insets left="7.0" top="5.0" /></TilePane.margin>
+                </Rectangle>
+                <Rectangle fx:id="blanc" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
+                    <TilePane.margin><Insets left="7.0" top="5.0" /></TilePane.margin>
+                </Rectangle>
+            </children>
+        </TilePane>
+    </children>
+    <effect>
+        <Blend />
+    </effect>
+</VBox>
