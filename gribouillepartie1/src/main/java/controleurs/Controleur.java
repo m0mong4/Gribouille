@@ -1,9 +1,9 @@
 package controleurs;
 
 import iut.gon.gribouille.modele.Dessin;
+import iut.gon.gribouille.modele.Etoile;
 import iut.gon.gribouille.modele.Figure;
 import iut.gon.gribouille.modele.Point;
-import iut.gon.gribouille.modele.Trace;
 import iut.gon.gribouillepartie1.Dialogues;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -14,21 +14,25 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controleur implements Initializable {
 
-    // --- Modèle ---
+    // --- Modèle (Attributs publics final selon consigne 2.1) ---
     public final Dessin dessin;
     public final SimpleDoubleProperty precX;
     public final SimpleDoubleProperty precY;
     public final SimpleObjectProperty<Color> couleur;
     public final SimpleIntegerProperty epaisseur;
 
-    // Non-final : change à chaque tracé
+    // Figure courante (non-final)
     public Figure figureCourante;
 
-    // --- Contrôleurs internes (nom = fx:id + "Controller") ---
+    // Outil courant (Stratégie)
+    private Outil outil;
+
+    // --- Contrôleurs internes ---
     @FXML private MenusController menusController;
     @FXML private StatutController statutController;
     @FXML private CouleursController couleursController;
@@ -45,52 +49,61 @@ public class Controleur implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Transmettre this à chaque contrôleur interne
         menusController.setControleur(this);
-        statutController.setControleur(this);   // lie precX, precY, epaisseur, couleur
+        statutController.setControleur(this);
         couleursController.setControleur(this);
-        dessinController.setControleur(this);   // lie canvas/pane + redessine au resize
+        dessinController.setControleur(this);
+        
+        // Initialisation par défaut sur l'outil Crayon [cite: 102]
+        this.outil = new OutilCrayon(this);
     }
 
-    // ----------------------------------------------------------------
-    // 2.3.1 — Quitter
-    // ----------------------------------------------------------------
-
-    /**
-     * Demande confirmation et retourne true si on doit fermer.
-     * Appelée depuis MenusController ET depuis App.setOnCloseRequest.
-     */
     public boolean onQuitter() {
         return !Dialogues.confirmation();
     }
 
-    // ----------------------------------------------------------------
-    // 2.3.2 — Dessin (logique souris + redessiner)
-    // ----------------------------------------------------------------
+    public void trace(double x1, double y1, double x2, double y2) {
+        dessinController.trace(x1, y1, x2, y2);
+    }
 
+    // --- Souris : Mise à jour des coordonnées puis délégation à l'outil ---
     public void onMousePressed(MouseEvent evt) {
         precX.set(evt.getX());
         precY.set(evt.getY());
-        figureCourante = new Trace(epaisseur.get(), couleur.get().toString(),
-                                   evt.getX(), evt.getY());
-        dessin.addFigure(figureCourante);
+        outil.onMousePressed(evt); // [cite: 102]
     }
 
     public void onMouseDragged(MouseEvent evt) {
-        dessinController.trace(precX.get(), precY.get(), evt.getX(), evt.getY());
+        outil.onMouseDragged(evt); // [cite: 102]
         precX.set(evt.getX());
         precY.set(evt.getY());
-        figureCourante.addPoint(evt.getX(), evt.getY());
     }
 
-    /** Redessine toutes les figures (appelée lors d'un resize du canvas). */
+    // --- Changement d'outil [cite: 109, 110] ---
+    public void onCrayon() {
+        this.outil = new OutilCrayon(this);
+        statutController.outil.setText("Crayon");
+    }
+
+    public void onEtoile() {
+        this.outil = new OutilEtoile(this);
+        statutController.outil.setText("Étoile");
+    }
+
+    // --- Redessiner les figures (gère désormais les Étoiles) [cite: 114, 115] ---
     public void dessine() {
         for (Figure f : dessin.getFigures()) {
-            java.util.List<Point> pts = f.getPoints();
-            for (int i = 0; i < pts.size() - 1; i++) {
-                Point p1 = pts.get(i);
-                Point p2 = pts.get(i + 1);
-                dessinController.trace(p1.getX(), p1.getY(), p2.getX(), p2.getY());
+            List<Point> pts = f.getPoints();
+            if (f instanceof Etoile) {
+                Point centre = ((Etoile) f).getCentre();
+                for (Point p : pts) {
+                    dessinController.trace(centre.getX(), centre.getY(), p.getX(), p.getY());
+                }
+            } else {
+                for (int i = 0; i < pts.size() - 1; i++) {
+                    dessinController.trace(pts.get(i).getX(), pts.get(i).getY(),
+                                           pts.get(i+1).getX(), pts.get(i+1).getY());
+                }
             }
         }
     }
