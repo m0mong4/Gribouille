@@ -22,11 +22,16 @@ public class App extends Application {
         stage.setScene(scene);
         stage.titleProperty().bind(controleur.dessin.nomDuFichierProperty());
 
-        // Délégation de la confirmation de fermeture au contrôleur
+
         stage.setOnCloseRequest(event -> {
             if (!controleur.onQuitter()) {
                 event.consume();
             }
+        });
+
+
+        stage.addEventHandler(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> {
+            controleur.onKeyPressed(event.getText());
         });
 
         stage.show();

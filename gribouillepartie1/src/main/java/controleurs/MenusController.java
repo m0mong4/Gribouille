@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 public class MenusController implements Initializable {
 
     @FXML public ToggleGroup choixepaisseur;
-    @FXML public ToggleGroup choixstylo; // fx:id du ToggleGroup dans FXML 
+    @FXML public ToggleGroup choixstylo; 
     @FXML public RadioMenuItem menuCrayon;
     @FXML public RadioMenuItem menuEtoile;
 
@@ -26,12 +26,20 @@ public class MenusController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Listener sur le changement d'outil dans le menu [cite: 106]
+
         choixstylo.selectedToggleProperty().addListener((obs, oldV, newV) -> {
             if (newV == menuCrayon) {
-                controleur.onCrayon(); // [cite: 107]
+                controleur.onCrayon();
             } else if (newV == menuEtoile) {
-                controleur.onEtoile(); // [cite: 108]
+                controleur.onEtoile();
+            }
+        });
+
+
+        choixepaisseur.selectedToggleProperty().addListener((obs, oldV, newV) -> {
+            if (newV != null) {
+                String texte = ((RadioMenuItem) newV).getText();
+                controleur.setEpaisseur(Integer.parseInt(texte));
             }
         });
     }

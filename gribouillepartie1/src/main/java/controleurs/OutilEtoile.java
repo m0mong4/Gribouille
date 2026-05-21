@@ -1,6 +1,7 @@
 package controleurs;
 
 import iut.gon.gribouille.modele.Etoile;
+import iut.gon.gribouille.modele.Figure;
 import iut.gon.gribouille.modele.Point;
 import javafx.scene.input.MouseEvent;
 
@@ -20,6 +21,9 @@ public class OutilEtoile extends Outil {
             evt.getX(), evt.getY()
         );
         controleur.dessin.addFigure(figureCourante);
+        controleur.figureCourante = figureCourante;
+        controleur.setEpaisseur(controleur.epaisseur.get());
+        controleur.setCouleur(controleur.couleur.get());
     }
 
     @Override
@@ -30,5 +34,13 @@ public class OutilEtoile extends Outil {
             evt.getX(), evt.getY()
         );
         figureCourante.addPoint(evt.getX(), evt.getY());
+    }
+
+    @Override
+    public void setFigureCourante(Figure figure) {
+        if (figure instanceof Etoile) {
+            this.figureCourante = (Etoile) figure;
+            controleur.figureCourante = figure;
+        }
     }
 }

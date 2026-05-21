@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.geometry.Insets?>
 
-<VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: lightgrey;"
+<VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: lightgrey;" onMouseClicked="#onVBoxClique"
       xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="controleurs.CouleursController">
     <children>

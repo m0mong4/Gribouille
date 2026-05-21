@@ -19,20 +19,16 @@ import java.util.ResourceBundle;
 
 public class Controleur implements Initializable {
 
-    // --- Modèle (Attributs publics final selon consigne 2.1) ---
+    
     public final Dessin dessin;
     public final SimpleDoubleProperty precX;
     public final SimpleDoubleProperty precY;
     public final SimpleObjectProperty<Color> couleur;
     public final SimpleIntegerProperty epaisseur;
 
-    // Figure courante (non-final)
     public Figure figureCourante;
 
-    // Outil courant (Stratégie)
     private Outil outil;
-
-    // --- Contrôleurs internes ---
     @FXML private MenusController menusController;
     @FXML private StatutController statutController;
     @FXML private CouleursController couleursController;
@@ -53,8 +49,7 @@ public class Controleur implements Initializable {
         statutController.setControleur(this);
         couleursController.setControleur(this);
         dessinController.setControleur(this);
-        
-        // Initialisation par défaut sur l'outil Crayon [cite: 102]
+
         this.outil = new OutilCrayon(this);
     }
 
@@ -66,20 +61,34 @@ public class Controleur implements Initializable {
         dessinController.trace(x1, y1, x2, y2);
     }
 
-    // --- Souris : Mise à jour des coordonnées puis délégation à l'outil ---
     public void onMousePressed(MouseEvent evt) {
         precX.set(evt.getX());
         precY.set(evt.getY());
-        outil.onMousePressed(evt); // [cite: 102]
+        outil.onMousePressed(evt);
     }
 
     public void onMouseDragged(MouseEvent evt) {
-        outil.onMouseDragged(evt); // [cite: 102]
+        outil.onMouseDragged(evt);
         precX.set(evt.getX());
         precY.set(evt.getY());
     }
 
-    // --- Changement d'outil [cite: 109, 110] ---
+    public void setEpaisseur(int ep) {
+        this.epaisseur.set(ep);
+        dessinController.setEpaisseur(ep);
+    }
+
+    public void setCouleur(Color c) {
+        this.couleur.set(c);
+        dessinController.setCouleur(c);
+        if (figureCourante != null) {
+            Figure nouvelleFigure = figureCourante.changeCouleur(c.toString());
+            dessin.addFigure(nouvelleFigure);
+            outil.setFigureCourante(nouvelleFigure);
+            figureCourante = nouvelleFigure;
+        }
+    }
+
     public void onCrayon() {
         this.outil = new OutilCrayon(this);
         statutController.outil.setText("Crayon");
@@ -90,9 +99,39 @@ public class Controleur implements Initializable {
         statutController.outil.setText("Étoile");
     }
 
-    // --- Redessiner les figures (gère désormais les Étoiles) [cite: 114, 115] ---
+    public void onKeyPressed(String key) {
+        switch (key) {
+            case "c" -> onCrayon();
+            case "e" -> onEtoile();
+
+            case "1" -> setEpaisseur(1);
+            case "2" -> setEpaisseur(2);
+            case "3" -> setEpaisseur(3);
+            case "4" -> setEpaisseur(4);
+            case "5" -> setEpaisseur(5);
+            case "6" -> setEpaisseur(6);
+            case "7" -> setEpaisseur(7);
+            case "8" -> setEpaisseur(8);
+            case "9" -> setEpaisseur(9);
+
+            case "r" -> setCouleur(Color.RED);
+            case "v" -> setCouleur(Color.GREEN);
+            case "b" -> setCouleur(Color.BLUE);
+            case "n" -> setCouleur(Color.BLACK);
+            case "j" -> setCouleur(Color.YELLOW);
+            case "p" -> setCouleur(Color.PINK);
+            case "w" -> setCouleur(Color.WHITE);
+            case "q" -> setCouleur(Color.CYAN);
+
+            default -> { /* touche non gérée */ }
+        }
+    }
+
+
     public void dessine() {
         for (Figure f : dessin.getFigures()) {
+            dessinController.setEpaisseur(f.getEpaisseur());
+            dessinController.setCouleur(Color.valueOf(f.getCouleur()));
             List<Point> pts = f.getPoints();
             if (f instanceof Etoile) {
                 Point centre = ((Etoile) f).getCentre();
@@ -106,5 +145,7 @@ public class Controleur implements Initializable {
                 }
             }
         }
+        dessinController.setEpaisseur(epaisseur.get());
+        dessinController.setCouleur(couleur.get());
     }
 }

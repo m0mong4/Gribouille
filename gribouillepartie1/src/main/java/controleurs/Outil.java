@@ -1,5 +1,6 @@
 package controleurs;
 
+import iut.gon.gribouille.modele.Figure;
 import javafx.scene.input.MouseEvent;
 
 public abstract class Outil {
@@ -12,4 +13,7 @@ public abstract class Outil {
 
     public abstract void onMousePressed(MouseEvent evt);
     public abstract void onMouseDragged(MouseEvent evt);
+
+    
+    public abstract void setFigureCourante(Figure figure);
 }
