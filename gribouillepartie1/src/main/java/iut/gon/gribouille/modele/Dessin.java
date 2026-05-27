@@ -2,11 +2,17 @@ package iut.gon.gribouille.modele;
 
 import javafx.beans.binding.BooleanExpression;
 import javafx.beans.binding.StringExpression;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  Stocke un dessin constitué de figures
@@ -25,6 +31,7 @@ public class Dessin {
    La liste des figures
    */
   private List<Figure> figures;
+  private ObjectProperty<File> fichier = new SimpleObjectProperty<>();
 
   /**
    Crée un dessin vide sans nom
@@ -95,6 +102,47 @@ public class Dessin {
    */
   public StringExpression nomDuFichierProperty() {
     return nomDuFichier;
+  }
+  
+  /** Sauvegarde le dessin dans le fichier spécifié.
+   *  Change le nom du dessin si succès.
+   */
+  public void sauveSous(String nom) {
+    try {
+      File nouveauFichier = new File(nom);
+      PrintWriter out = new PrintWriter(nouveauFichier);
+      figures.forEach(f->f.sauve(out));
+      out.close();
+      this.fichier.set(nouveauFichier);
+      estModifie.set(false);
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+  }
+
+  /** Charge le dessin depuis le fichier spécifié.
+   *  Change le nom du dessin si succès.
+   * @throws IllegalArgumentException si le fichier est illisible
+   */
+  public void charge(String nom) {
+    File nouveauFichier = new File(nom);
+    if (nouveauFichier.exists() && nouveauFichier.canRead()) {
+      figures.clear();
+      try {
+        Scanner scanner = new Scanner(nouveauFichier);
+        while (scanner.hasNextLine()) {
+          String ligne = scanner.nextLine();
+          if (! ligne.isBlank())
+            figures.add(Figure.charge(ligne));
+        }
+        this.fichier.set(nouveauFichier);
+        estModifie.set(false);
+      } catch (FileNotFoundException e) {
+        throw new IllegalArgumentException("Ce fichier est introuvable !");
+      }
+    } else {
+      throw new IllegalArgumentException("Ce fichier est illisible !");
+    }
   }
 
 } // public class Dessin

@@ -1,6 +1,7 @@
 package controleurs;
 
 import iut.gon.gribouille.modele.Dessin;
+import javafx.scene.control.ButtonBar;
 import iut.gon.gribouille.modele.Etoile;
 import iut.gon.gribouille.modele.Figure;
 import iut.gon.gribouille.modele.Point;
@@ -10,11 +11,16 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Controleur implements Initializable {
@@ -54,7 +60,36 @@ public class Controleur implements Initializable {
     }
 
     public boolean onQuitter() {
-        return !Dialogues.confirmation();
+        if (!dessin.getEstModifie()) {
+            return true; 
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Quitter");
+        alert.setHeaderText("Le dessin a été modifié.");
+        alert.setContentText("Voulez-vous sauvegarder avant de quitter ?");
+
+        ButtonType btnSauvegarder  = new ButtonType("Sauvegarder et quitter");
+        ButtonType btnSansSauvegarde = new ButtonType("Quitter sans sauvegarder");
+        ButtonType btnAnnuler      = new ButtonType("Annuler", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(btnSauvegarder, btnSansSauvegarde, btnAnnuler);
+
+        Optional<ButtonType> resultat = alert.showAndWait();
+
+        if (resultat.isEmpty() || resultat.get() == btnAnnuler) {
+            return false; 
+        } else if (resultat.get() == btnSansSauvegarde) {
+            return true; 
+        } else {
+            try {
+                sauvegarde();
+                return dessin.getNomDuFichier() != null
+                    && !dessin.getNomDuFichier().equals("Sans Nom"); 
+                } catch (Exception e) {
+                return false; 
+            }
+        }
     }
 
     public void trace(double x1, double y1, double x2, double y2) {
@@ -147,5 +182,31 @@ public class Controleur implements Initializable {
         }
         dessinController.setEpaisseur(epaisseur.get());
         dessinController.setCouleur(couleur.get());
+    }
+    
+    public void sauvegarde() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Sauvegarder le dessin");
+        fileChooser.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter("Fichiers dessin", "*.gri")
+        );
+        File fichier = fileChooser.showSaveDialog(null);
+        if (fichier != null) {
+            dessin.sauveSous(fichier.getAbsolutePath());
+        }
+    }
+    
+    public void charge() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Charger un dessin");
+        fileChooser.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter("Fichiers dessin", "*.gri")
+        );
+        File fichier = fileChooser.showOpenDialog(null);
+        if (fichier != null) {
+            dessin.charge(fichier.getAbsolutePath());
+            dessinController.efface();
+            dessine();
+        }
     }
 }

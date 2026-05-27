@@ -50,4 +50,14 @@ public class MenusController implements Initializable {
             Platform.exit();
         }
     }
+    
+    @FXML
+    public void onSauvegarder(ActionEvent evt) {
+        controleur.sauvegarde();
+    }
+    
+    @FXML
+    public void onCharger(ActionEvent evt) {
+        controleur.charge();
+    }
 }

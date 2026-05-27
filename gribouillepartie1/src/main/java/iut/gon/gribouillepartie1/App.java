@@ -2,6 +2,7 @@ package iut.gon.gribouillepartie1;
 
 import controleurs.Controleur;
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,7 +21,14 @@ public class App extends Application {
         Controleur controleur = fxmlLoader.getController();
 
         stage.setScene(scene);
-        stage.titleProperty().bind(controleur.dessin.nomDuFichierProperty());
+        stage.titleProperty().bind(
+        	    Bindings.concat(
+        	        controleur.dessin.nomDuFichierProperty(),
+        	        Bindings.when(controleur.dessin.estModifieProperty())
+        	            .then(" *")
+        	            .otherwise("")
+        	    )
+        	);
 
 
         stage.setOnCloseRequest(event -> {

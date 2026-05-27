@@ -14,7 +14,7 @@
         <ColorPicker fx:id="choix_couleur" />
         <TilePane prefHeight="200.0" prefWidth="200.0">
             <children>
-                <Rectangle fx:id="rouge" arcHeight="5.0" arcWidth="5.0" fill="#e1273c" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="40.0">
+                <Rectangle fx:id="rouge" arcHeight="5.0" arcWidth="5.0" fill="#e1273c" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
                     <TilePane.margin><Insets left="7.0" top="5.0" /></TilePane.margin>
                 </Rectangle>
                 <Rectangle fx:id="vert" arcHeight="5.0" arcWidth="5.0" fill="#4fb56f" height="40.0" stroke="BLACK" strokeType="INSIDE" width="40.0">
