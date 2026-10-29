@@ -11,7 +11,7 @@ A small Paint-style drawing project, made in class.
 ### 1. Get the project
 
 ```bash
-git clone https://github.com/m0mong4/Gribouille.git
+git clone https://github.com/m0mong4/gribouille.git
 cd Gribouille
 git checkout gribouille_stable
 ```
