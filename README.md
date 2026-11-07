@@ -2,7 +2,7 @@
 
 A small Paint-style drawing project, made in class.
 
-# Aperçu
+# Preview
 
 ![Aperçu de MiniChat](paint.png)
 
