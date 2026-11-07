@@ -2,6 +2,10 @@
 
 A small Paint-style drawing project, made in class.
 
+# Aperçu
+
+![Aperçu de MiniChat](paint.png)
+
 ## Getting Started
 
  **Important: use the `gribouille_stable` branch**, it contains the working version.
